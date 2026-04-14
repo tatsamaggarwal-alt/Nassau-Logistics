@@ -81,6 +81,7 @@ def load_and_process_data(file_path: str, delay_threshold: int = 5) -> pd.DataFr
     df = df.dropna(subset=available_required).copy()
 
     df["Lead Time"] = (df["Ship Date"] - df["Order Date"]).dt.days
+    df = df[(df['Lead Time'] >= 0) & (df['Lead Time'] <= 30)]
     df = df[df["Lead Time"].notna()].copy()
     df = df[df["Lead Time"] >= 0].copy()
 
